@@ -1,0 +1,28 @@
+<br />
+@if(customer){
+<h2>
+  {{ customer.name }} - {{ customer.city }} -
+  {{ customer.orderTotal | currency : "USD" }}
+</h2>
+
+<br />
+<table class="table table-hover orders-table">
+  <tr>
+    <th>productName</th>
+    <th>itemCost</th>
+  </tr>
+  @for(order of orders; track order.customerId){ @for(orderItem of
+  order.orderItems; track orderItem.id){
+  <tr>
+    <td>{{ orderItem.productName }}</td>
+    <td>{{ orderItem.itemCost | currency : "USD" }}</td>
+  </tr>
+  } }
+</table>
+} @else {
+<h2 style="color: red">No Orders Found</h2>
+}
+
+<br />
+
+<a [routerLink]="['/']">All Customers</a>
